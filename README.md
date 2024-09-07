@@ -23,3 +23,8 @@ To run this project, you need Python 3.x and the following libraries:
 You can install the required libraries with:
 ```bash
 pip install Pillow numpy matplotlib
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
