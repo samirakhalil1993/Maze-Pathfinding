@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import deque
 import time
-#samir akhalil
+
 # Load the maze image
 image_path = '/home/samir-akhalil/Pictures/Screenshots/Maze.png'  # Make sure the path is correct
 img = Image.open(image_path).convert('L')  # Convert the image to grayscale
@@ -259,8 +259,6 @@ def run_algorithm_comparison(maze, start_point, goal_point):
     else:
         print("A* Search is the fastest algorithm.")
 
-
-print("samiiiiiiiiiiiiiiiiiiiiiiir")
 # Main program flow
 start_point = (0, 1)  # Adjust these as per your maze's start point
 goal_point = (9, 18)  # Adjust these as per your maze's goal point
