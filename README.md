@@ -22,7 +22,7 @@ To run this project, you need Python 3.x and the following libraries:
 
 You can install the required libraries with:
 
-pip install Pillow numpy matplotlib\.
+```pip install Pillow numpy matplotlib```
 
 ## License
 
