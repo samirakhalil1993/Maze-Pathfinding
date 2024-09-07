@@ -268,8 +268,3 @@ goal_point = (9, 18)  # Adjust these as per your maze's goal point
 
 # Run the algorithm comparison
 run_algorithm_comparison(maze, start_point, goal_point)
-
-
-
-
-
