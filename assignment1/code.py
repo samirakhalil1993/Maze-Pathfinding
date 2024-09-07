@@ -202,9 +202,15 @@ def a_star(maze, start, goal):
     return None
 
 
-
 def print_maze_with_path(maze, path):
-    # Create a copy of the maze as a list of strings
+    """
+    Prints the maze with the path marked.
+
+    Args:
+        maze (list[list[int]]): 2D list representing the maze grid. 0 indicates a free space, 1 indicates an obstacle.
+        path (list[tuple[int, int]]): A list of tuples representing the path from start to goal.
+    """
+    # Create a copy of the maze as a list of strings for easier manipulation
     maze_copy = np.array(maze, dtype=str)
     
     # Replace the path coordinates with '*'
@@ -215,9 +221,20 @@ def print_maze_with_path(maze, path):
     for row in maze_copy:
         print("".join(row))
 
-
-
 def run_algorithm(algorithm_name, algorithm_func, maze, start_point, goal_point):
+    """
+    Executes a given algorithm and prints its performance.
+
+    Args:
+        algorithm_name (str): The name of the algorithm being run.
+        algorithm_func (callable): The function implementing the algorithm.
+        maze (list[list[int]]): 2D list representing the maze grid.
+        start_point (tuple[int, int]): The starting coordinates (x, y) in the maze.
+        goal_point (tuple[int, int]): The target coordinates (x, y) in the maze.
+
+    Returns:
+        float: The execution time of the algorithm in seconds.
+    """
     print(f"Running {algorithm_name}...")
     start_time = time.time()
     path = algorithm_func(maze, start_point, goal_point)
@@ -236,22 +253,30 @@ def run_algorithm(algorithm_name, algorithm_func, maze, start_point, goal_point)
     return execution_time
 
 def run_algorithm_comparison(maze, start_point, goal_point):
-    # Run BFS
+    """
+    Compares the execution times of BFS, DFS, and A* algorithms.
+
+    Args:
+        maze (list[list[int]]): 2D list representing the maze grid.
+        start_point (tuple[int, int]): The starting coordinates (x, y) in the maze.
+        goal_point (tuple[int, int]): The target coordinates (x, y) in the maze.
+    """
+    # Run BFS and record the time
     bfs_time = run_algorithm("BFS", bfs, maze, start_point, goal_point)
     
-    # Run DFS
+    # Run DFS and record the time
     dfs_time = run_algorithm("DFS", dfs, maze, start_point, goal_point)
     
-    # Run A* Search
+    # Run A* Search and record the time
     a_star_time = run_algorithm("A*", a_star, maze, start_point, goal_point)
     
-    # Compare times
+    # Print comparison of execution times
     print("\nComparison of Execution Times:")
     print(f"BFS Time: {bfs_time:.5f} seconds")
     print(f"DFS Time: {dfs_time:.5f} seconds")
     print(f"A*  Time : {a_star_time:.5f} seconds")
 
-    # Determine the fastest algorithm
+    # Determine the fastest algorithm based on recorded times
     if bfs_time < dfs_time and bfs_time < a_star_time:
         print("BFS is the fastest algorithm.")
     elif dfs_time < bfs_time and dfs_time < a_star_time:
@@ -260,13 +285,12 @@ def run_algorithm_comparison(maze, start_point, goal_point):
         print("A* Search is the fastest algorithm.")
 
 # Main program flow
-start_point = (0, 1)  # Adjust these as per your maze's start point
-goal_point = (9, 18)  # Adjust these as per your maze's goal point
+start_point = (0, 1)  # Example start point (adjust as needed)
+goal_point = (9, 18)  # Example goal point (adjust as needed)
 
-
+# Assume 'maze' is defined elsewhere in your code
 # Run the algorithm comparison
 run_algorithm_comparison(maze, start_point, goal_point)
-
 
 
 
