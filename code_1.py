@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import deque
 import time
-
+#samir akhalil
 # Load the maze image
 image_path = '/home/samir-akhalil/Pictures/Screenshots/Maze.png'  # Make sure the path is correct
 img = Image.open(image_path).convert('L')  # Convert the image to grayscale
