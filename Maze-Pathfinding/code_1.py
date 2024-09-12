@@ -1,31 +1,9 @@
 
-from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import deque
 import time
 
-# # Load the maze image
-# image_path = '/home/samir-akhalil/Pictures/Screenshots/Maze.png'  # Make sure the path is correct
-# img = Image.open(image_path).convert('L')  # Convert the image to grayscale
-
-# # Convert the grayscale image to a NumPy array
-# maze_array = np.array(img)
-
-# # Apply a threshold to convert black pixels (paths) to 0 and white pixels (walls) to 1
-# threshold = 128  # Adjust based on the image contrast
-# maze_binary = (maze_array > threshold).astype(int)  # Now, 0 = black (free path), 1 = white (wall)
-
-
-# # Visualize the binary maze (with 0 as black, 1 as white)
-# plt.imshow(maze_binary, cmap='gray')
-# plt.show()
-
-# # Save the processed binary maze image
-# output_path = '/home/samir-akhalil/Desktop/python/maze_binary_output.png'
-# plt.imsave(output_path, maze_binary, cmap='gray')
-
-# print(f"Maze saved as 'maze_binary_output.png' in the specified directory.")
 
 
 # Define the maze
