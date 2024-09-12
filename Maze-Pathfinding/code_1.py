@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from collections import deque
 import time
 import heapq
-
+# Last update
 # Define the maze
 maze = np.array([
     [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0],  
