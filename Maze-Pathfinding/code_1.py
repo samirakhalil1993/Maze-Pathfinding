@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from collections import deque
 import time
 import heapq
+from memory_profiler import memory_usage  # Import memory profiler
+
 
 # Last update
 # Define the maze
@@ -18,6 +20,13 @@ maze = np.array([
     [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1],  
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1]
 ])
+
+def measure_memory(func, maze, start_point, goal_point):
+    def wrapper():
+        return func(maze, start_point, goal_point)
+    mem_usage = memory_usage(wrapper)  # Memory usage during the execution of the function
+    return mem_usage
+
 def print_maze_with_path(maze, path):
     # Create a visualization of the maze with the path marked
     maze_copy = np.array(maze, dtype=object)  # Convert to object type to allow for mixed types
@@ -119,7 +128,7 @@ def a_star(maze, start, goal):
 
     return None
 
-# Running the algorithm and comparing times
+#   Running the algorithm and comparing times
 def run_algorithm(algorithm_name, algorithm_func, maze, start_point, goal_point):
     start_time = time.time()
     path = algorithm_func(maze, start_point, goal_point)
@@ -132,6 +141,9 @@ def run_algorithm(algorithm_name, algorithm_func, maze, start_point, goal_point)
 
     else:
         print(f"{algorithm_name} could not find a path.")
+
+    mem_usage = measure_memory(algorithm_func, maze, start_point, goal_point)
+    print(f"Memory usage for {algorithm_name}: {max(mem_usage):.2f} MiB")
     
     return execution_time
 
