@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 from collections import deque
 import time
 import heapq
+from memory_profiler import profile
+
 # Last update
 # Define the maze
 maze = np.array([
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0],  
+    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],  
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0],  
     [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],  
     [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0],  
@@ -17,9 +19,23 @@ maze = np.array([
     [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1],  
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1]
 ])
+def print_maze_with_path(maze, path):
+    # Create a visualization of the maze with the path marked
+    maze_copy = np.array(maze, dtype=object)  # Convert to object type to allow for mixed types
+    
+    # Mark the path with '*'
+    for (x, y) in path:
+        maze_copy[x][y] = '*'  # Mark the path as '*'
+    
+    # Print the maze, handling strings and integers separately
+    for row in maze_copy:
+        print(' '.join(str(cell) for cell in row))  # Ensure everything is printed as a string
 
-# Function to plot the maze
-def plot_maze(maze, path=None):
+
+
+
+# Function to plot the maze and save it to a file without showing
+def plot_maze(maze, path=None, filename="maze_plot.png"):
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.imshow(maze, cmap='gray_r')
 
@@ -31,7 +47,11 @@ def plot_maze(maze, path=None):
     ax.set_xticks(np.arange(-.5, maze.shape[1], 1), minor=True)
     ax.set_yticks(np.arange(-.5, maze.shape[0], 1), minor=True)
     ax.tick_params(which='major', bottom=False, left=False, labelbottom=False, labelleft=False)
-    plt.show()
+
+    # Save the plot to a file
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()  # Close the plot to free up memory
+
 
 # Algorithm implementations (BFS, DFS, A*)
 def bfs(maze, start, goal):
@@ -95,6 +115,9 @@ def a_star(maze, start, goal):
                 new_cost = cost + 1
                 est_total_cost = new_cost + manhattan_distance((nx, ny), goal)
                 heapq.heappush(pq, (est_total_cost, new_cost, (nx, ny), path))
+                
+                
+
     return None
 
 # Running the algorithm and comparing times
@@ -105,7 +128,9 @@ def run_algorithm(algorithm_name, algorithm_func, maze, start_point, goal_point)
     
     if path:
         print(f"{algorithm_name} found a path with length {len(path)} in {execution_time:.4f} seconds.")
-        plot_maze(maze, path)
+        print_maze_with_path(maze, path)
+        plot_maze(maze, path, filename=f"{algorithm_name}_plot.png")
+
     else:
         print(f"{algorithm_name} could not find a path.")
     
@@ -167,9 +192,6 @@ def main():
     
     
 
-
-    fastest_algorithm = min(times, key=times.get)
-    print(f"\nThe fastest algorithm is {fastest_algorithm}.")
 
 # Run the program
 if __name__ == "__main__":
