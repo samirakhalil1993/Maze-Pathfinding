@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from collections import deque
 import time
 import heapq
-from memory_profiler import profile
 
 # Last update
 # Define the maze
